@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FileText, Receipt, FileCode, ArrowRight, ShieldCheck } from 'lucide-react';
+import { FileText, Receipt, FileCode, Image, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function Home() {
   const tools = [
@@ -31,6 +31,15 @@ export default function Home() {
       badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
     },
     {
+      title: 'Image Converter & Compressor',
+      description:
+        'Schimbă formatul imaginilor (PNG, JPG, WebP) și redu dimensiunea lor direct în browser.',
+      icon: Image,
+      href: '/image-converter',
+      badge: 'NEW',
+      badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    },
+    {
       title: 'Exif & Privacy Cleaner',
       description:
         'Remove GPS coordinates, camera model, and private metadata from your photos.',
@@ -46,12 +55,12 @@ export default function Home() {
       <div className="max-w-5xl mx-auto">
         <header className="text-center mb-12">
           <h1 className="text-4xl font-extrabold tracking-tight mb-3">OmniTools</h1>
-          <p className="text-slate-400 max-width-md mx-auto">
-            A suit of privacy-first, browser-based utilities for developers and creators.
+          <p className="text-slate-400 max-w-md mx-auto">
+            A suite of privacy-first, browser-based utilities for developers and creators.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool) => {
             const Icon = tool.icon;
             return (
