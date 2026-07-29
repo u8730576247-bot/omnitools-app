@@ -1,128 +1,105 @@
-'use client';
+import Link from 'next/link';
+import { FileText, Receipt, FileCode, Image, ShieldCheck, ArrowRight } from 'lucide-react';
 
-import { useState } from 'react';
-import { FileCode, Download, Copy, Check } from 'lucide-react';
-
-export default function JsonConverter() {
-  const [jsonInput, setJsonInput] = useState('');
-  const [csvOutput, setCsvOutput] = useState('');
-  const [copied, setCopied] = useState(false);
-  const [error, setError] = useState('');
-
-  const convertToCsv = () => {
-    setError('');
-    try {
-      if (!jsonInput.trim()) return;
-      const parsed = JSON.parse(jsonInput);
-      const array = Array.isArray(parsed) ? parsed : [parsed];
-
-      if (array.length === 0) {
-        setError('JSON array is empty.');
-        return;
-      }
-
-      const headers = Object.keys(array[0]);
-      const csvRows = [
-        headers.join(','),
-        ...array.map((row) =>
-          headers
-            .map((field) => JSON.stringify(row[field] ?? ''))
-            .join(',')
-        ),
-      ];
-
-      setCsvOutput(csvRows.join('\n'));
-    } catch (err) {
-      setError('Invalid JSON syntax. Please check your input.');
-    }
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(csvOutput);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleDownload = () => {
-    const blob = new Blob([csvOutput], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'omnitools-data.csv';
-    link.click();
-  };
+export default function Home() {
+  const tools = [
+    {
+      title: 'PDF Merger & Splitter',
+      description:
+        'Securely merge and manipulate PDF files locally in your browser.',
+      icon: FileText,
+      href: '/pdf-merger',
+      badge: 'POPULAR',
+      badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+    },
+    {
+      title: 'Free Invoice Generator',
+      description:
+        'Create professional invoices and receipts in seconds. Export to PDF instantly.',
+      icon: Receipt,
+      href: '/invoice-generator',
+      badge: 'B2B',
+      badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    },
+    {
+      title: 'JSON to CSV Converter',
+      description:
+        'Convert JSON data into clean CSV sheets instantly in your browser.',
+      icon: FileCode,
+      href: '/json-converter',
+      badge: 'DEV TOOL',
+      badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+    },
+    {
+      title: 'Image Converter & Compressor',
+      description:
+        'Schimbă formatul imaginilor (PNG, JPG, WebP) și redu dimensiunea lor direct în browser.',
+      icon: Image,
+      href: '/image-converter',
+      badge: 'NEW',
+      badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    },
+    {
+      title: 'Exif & Privacy Cleaner',
+      description:
+        'Remove GPS coordinates, camera model, and private metadata from your photos.',
+      icon: ShieldCheck,
+      href: '/exif-cleaner',
+      badge: 'PRIVACY',
+      badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 p-6 flex flex-col items-center">
-      <div className="max-w-4xl w-full bg-slate-800 rounded-xl p-8 border border-slate-700 shadow-2xl">
-        <div className="flex items-center space-x-3 mb-6 border-b border-slate-700 pb-4">
-          <FileCode className="w-8 h-8 text-amber-400" />
-          <h1 className="text-2xl font-bold">JSON to CSV Converter</h1>
-        </div>
+    <main className="min-h-screen bg-slate-950 text-slate-100 p-8">
+      <div className="max-w-5xl mx-auto">
+        <header className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold tracking-tight mb-3">OmniTools</h1>
+          <p className="text-slate-400 max-w-md mx-auto">
+            A suite of privacy-first, browser-based utilities for developers and creators.
+          </p>
+        </header>
 
-        {error && (
-          <div className="bg-red-500/10 border border-red-500/50 text-red-400 text-sm p-3 rounded-lg mb-4">
-            {error}
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <label className="block text-xs font-semibold text-slate-400 mb-2">
-              PASTE JSON HERE
-            </label>
-            <textarea
-              rows={12}
-              placeholder='[{"id": 1, "name": "John Doe", "role": "Developer"}]'
-              value={jsonInput}
-              onChange={(e) => setJsonInput(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs font-mono focus:outline-none focus:border-amber-400"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold text-slate-400 mb-2">
-              CSV OUTPUT
-            </label>
-            <textarea
-              rows={12}
-              readOnly
-              value={csvOutput}
-              placeholder="CSV results will appear here..."
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs font-mono focus:outline-none text-slate-300"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-          <button
-            onClick={convertToCsv}
-            className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-lg transition-colors"
-          >
-            Convert to CSV
-          </button>
-
-          {csvOutput && (
-            <>
-              <button
-                onClick={handleCopy}
-                className="bg-slate-700 hover:bg-slate-600 text-white font-semibold px-4 py-2.5 rounded-lg transition-colors flex items-center space-x-2"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tools.map((tool) => {
+            const Icon = tool.icon;
+            return (
+              <Link
+                key={tool.href}
+                href={tool.href}
+                className="group relative bg-slate-900 border border-slate-800 hover:border-slate-700 p-6 rounded-2xl transition-all duration-200 hover:shadow-xl hover:shadow-slate-900/50 flex flex-col justify-between"
               >
-                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                <span>{copied ? 'Copied!' : 'Copy'}</span>
-              </button>
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-3 bg-slate-800/80 rounded-xl text-slate-200 group-hover:scale-105 transition-transform">
+                      <Icon size={24} />
+                    </div>
+                    <span
+                      className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${tool.badgeColor}`}
+                    >
+                      {tool.badge}
+                    </span>
+                  </div>
+                  <h2 className="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">
+                    {tool.title}
+                  </h2>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                    {tool.description}
+                  </p>
+                </div>
 
-              <button
-                onClick={handleDownload}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2.5 rounded-lg transition-colors flex items-center space-x-2"
-              >
-                <Download className="w-4 h-4" />
-                <span>Download .CSV</span>
-              </button>
-            </>
-          )}
+                <div className="flex items-center text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
+                  Open Tool{' '}
+                  <ArrowRight
+                    size={16}
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                  />
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
-    </div>
+    </main>
   );
 }
