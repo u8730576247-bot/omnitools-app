@@ -43,6 +43,14 @@ export default function Home() {
       badge: 'PRIVACY',
       badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
     },
+    {
+      title: 'VoxRexLex',
+      description: 'Aplicația ta Flutter pentru gestionat contracte și documente.',
+      icon: FileText, 
+      href: '/vox-rex-lex/index.html',
+      badge: 'NEW',
+      badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+    },
   ];
 
   return (
