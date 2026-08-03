@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         source: "/vox-rex-lex",
         destination: "/vox-rex-lex/index.html",
       },
+      {
+        source: "/vox-rex-lex/:path*",
+        destination: "/vox-rex-lex/:path*",
+      },
     ];
   },
 };
