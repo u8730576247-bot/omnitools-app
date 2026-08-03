@@ -51,8 +51,8 @@ export default function Home() {
         {/* Header cu Logo si Buton Buy Me a Coffee */}
         <header className="flex items-center justify-between mb-16 pt-4">
           <div className="flex items-center gap-3">
-            <div className="bg-blue-600 text-white font-bold p-2.5 rounded-xl text-xl">O</div>
-            <span className="text-2xl font-bold tracking-tight text-white">OmniTools</span>
+            <div className="bg-blue-600 text-white font-bold p-2.5 rounded-xl text-xl">K</div>
+            <span className="text-2xl font-bold tracking-tight text-white">KillKit</span>
           </div>
 
           <a
@@ -113,7 +113,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="text-center text-slate-500 text-sm mt-20 pt-8 border-t border-slate-800/50">
-          OmniTools © 2026 — Built for speed and privacy.
+          KillKit © 2026 — Built for speed and privacy.
         </footer>
       </div>
     </main>
