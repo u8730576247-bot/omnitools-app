@@ -89,7 +89,7 @@ export default function Home() {
           {tools.map((tool) => {
             const Icon = tool.icon;
             return (
-              <Link
+              <a
                 key={tool.href}
                 href={tool.href}
                 className="group relative bg-[#131927] border border-slate-800/80 hover:border-slate-700 p-6 rounded-2xl transition-all duration-200 hover:shadow-2xl flex flex-col justify-between"
