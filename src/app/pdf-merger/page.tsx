@@ -41,7 +41,7 @@ export default function PdfMerger() {
 
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'omnitools-merged.pdf';
+      link.download = 'killkit-merged.pdf';
       link.click();
     } catch (error) {
       console.error('Error merging PDFs:', error);

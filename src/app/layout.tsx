@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OmniTools - Utility Suite",
+  title: "KillKit",
   description: "All-in-one privacy-first micro-tools suite",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "OmniTools",
+    title: "KillKit",
   },
 };
 
