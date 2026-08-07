@@ -2,59 +2,293 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ShieldCheck, RefreshCw, Sparkles } from 'lucide-react';
+import {
+  FileText,
+  Receipt,
+  FileCode,
+  Image as ImageIcon,
+  ShieldCheck,
+  ArrowRight,
+  Coffee,
+  Sparkles,
+  Zap,
+  Mic,
+  Compass,
+  Route,
+  ChevronRight,
+} from 'lucide-react';
 
-export default function VoxRexLexPage() {
-  const [isLoading, setIsLoading] = useState(true);
+// Structura de unelte din ecosistem
+const ALL_TOOLS = [
+  {
+    id: 'vox-rex-lex',
+    title: 'VoxRexLex Workspace',
+    description: 'Aplicația completă de dictare și traducere juridică / medicală.',
+    icon: Mic,
+    href: '/vox-rex-lex',
+    badge: 'GEMSTONE',
+    badgeColor: 'bg-[#78ff73]/20 text-[#78ff73] border-[#78ff73]/30',
+  },
+  {
+    id: 'pdf-merger',
+    title: 'PDF Merger & Combiner',
+    description: 'Unește fișiere PDF direct în browser, 100% securizat și privat.',
+    icon: FileText,
+    href: '/pdf-merger',
+    badge: 'PDF CLUSTER',
+    badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+  },
+  {
+    id: 'json-converter',
+    title: 'JSON to CSV Converter',
+    description: 'Convertește date structurate JSON în tabele CSV / Excel instant.',
+    icon: FileCode,
+    href: '/json-converter',
+    badge: 'DATA CLUSTER',
+    badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+  },
+  {
+    id: 'image-converter',
+    title: 'Image Converter & Compressor',
+    description: 'Schimbă formatul imaginilor (PNG, JPG, WebP) și redu dimensiunea lor.',
+    icon: ImageIcon,
+    href: '/image-converter',
+    badge: 'MEDIA LAB',
+    badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+  },
+  {
+    id: 'exif-cleaner',
+    title: 'Exif & Privacy Cleaner',
+    description: 'Elimină coordonatele GPS, modelul camerei și metadatele din poze.',
+    icon: ShieldCheck,
+    href: '/exif-cleaner',
+    badge: 'PRIVACY',
+    badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+  },
+  {
+    id: 'invoice-generator',
+    title: 'Free Invoice Generator',
+    description: 'Creează facturi și chitanțe profesionale în câteva secunde.',
+    icon: Receipt,
+    href: '/invoice-generator',
+    badge: 'B2B SUITE',
+    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+  },
+];
+
+// Scenarii de translație (X -> Z -> Y)
+const PATHWAY_PRESETS = [
+  {
+    id: 'legal-doc',
+    label: '🎙️ Am înregistrări audio și vreau să trimit un contract/raport PDF curat',
+    from: 'Audio / Înregistrare (X)',
+    stopover: 'Curățare Metadate Exif (Z)',
+    to: 'Contract PDF Fuzionat (Y)',
+    steps: ['vox-rex-lex', 'exif-cleaner', 'pdf-merger'],
+  },
+  {
+    id: 'data-privacy',
+    label: '🖼️ Am imagini de pe teren/proiecte și vreau să le scot locația GPS și să le comprim',
+    from: 'Fotografii Brute (X)',
+    stopover: 'Ștergere Metadate Privacy (Z)',
+    to: 'WebP Optimizat Web (Y)',
+    steps: ['exif-cleaner', 'image-converter'],
+  },
+  {
+    id: 'dev-export',
+    label: '📊 Am un API JSON și trebuie să livrez un rapoart CSV / Factură clientului',
+    from: 'Sursă Date JSON (X)',
+    stopover: 'Export CSV / Tabel (Z)',
+    to: 'Factură B2B Finală (Y)',
+    steps: ['json-converter', 'invoice-generator'],
+  },
+];
+
+export default function Home() {
+  const [selectedPathway, setSelectedPathway] = useState<string | null>(null);
+
+  const currentPath = PATHWAY_PRESETS.find((p) => p.id === selectedPathway);
 
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-slate-100 flex flex-col">
-      {/* Navigation Header */}
-      <header className="border-b border-slate-800/80 bg-[#0B0F17]/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-slate-400 hover:text-[#78ff73] transition-colors text-sm font-medium group"
+    <main className="min-h-screen bg-[#0B0F17] text-slate-100 p-6 md:p-12 font-sans selection:bg-[#78ff73] selection:text-black">
+      <div className="max-w-6xl mx-auto space-y-16">
+        
+        {/* Header Navigation */}
+        <header className="flex items-center justify-between border-b border-slate-800/60 pb-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-[#78ff73] text-black font-black p-2.5 rounded-xl text-xl shadow-lg shadow-[#78ff73]/20">
+              K
+            </div>
+            <div>
+              <span className="text-2xl font-bold tracking-tight text-white">KillKit</span>
+              <span className="text-xs block text-[#78ff73] font-mono tracking-wider">MUNDUS MIRABILIS</span>
+            </div>
+          </div>
+
+          <a
+            href="https://www.buymeacoffee.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:scale-105"
           >
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Rețea</span>
-          </Link>
+            <Coffee size={18} />
+            <span className="hidden sm:inline">Buy me a coffee</span>
+          </a>
+        </header>
 
-          <div className="h-4 w-[1px] bg-slate-800" />
-
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-white text-lg tracking-tight">VoxRexLex</span>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#78ff73]/10 text-[#78ff73] border border-[#78ff73]/30">
-              MODULE ACTIVE
-            </span>
+        {/* Hero Section */}
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 me-2 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-400">
+            <Sparkles size={14} className="text-[#78ff73]" />
+            <span>Translație Rapidă în Mundus Mirabilis</span>
           </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            Din cotidianul banal, <br />
+            în <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#78ff73] via-emerald-400 to-indigo-400">Ecosistemul Conectat</span>
+          </h1>
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
+            Ghidul tău prin galaxiile de micro-unelte. Alege unde te afli ($X$) și unde vrei să ajungi ($Y$), iar noi trasăm ruta optimă.
+          </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs text-slate-400">
-          <div className="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-            <ShieldCheck size={14} className="text-[#78ff73]" />
-            <span>Encrypted Local Processing</span>
+        {/* --- PATHFINDER / VORTEX ROUTER SECTION --- */}
+        <section className="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 md:p-8 backdrop-blur-md relative overflow-hidden shadow-2xl">
+          <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#78ff73]/5 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2.5 bg-[#78ff73]/10 text-[#78ff73] rounded-xl border border-[#78ff73]/20">
+              <Compass size={22} className="animate-spin-slow" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                Vortex Pathfinder <span className="text-xs font-mono text-[#78ff73] bg-[#78ff73]/10 px-2 py-0.5 rounded border border-[#78ff73]/30">X ➔ Z ➔ Y</span>
+              </h2>
+              <p className="text-xs text-slate-400">Selectează intenția ta pentru a aprinde liniile de translație:</p>
+            </div>
           </div>
-        </div>
-      </header>
 
-      {/* Main App Canvas */}
-      <div className="flex-1 relative w-full h-[calc(100vh-73px)] bg-[#0B0F17]">
-        {/* Loading Indicator */}
-        {isLoading && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0F17] z-10 gap-3">
-            <RefreshCw size={28} className="text-[#78ff73] animate-spin" />
-            <p className="text-slate-400 text-sm font-mono">Se încarcă modulul VoxRexLex...</p>
+          {/* Selector Scenario */}
+          <div className="grid grid-cols-1 gap-3 mb-8">
+            {PATHWAY_PRESETS.map((path) => (
+              <button
+                key={path.id}
+                onClick={() => setSelectedPathway(selectedPathway === path.id ? null : path.id)}
+                className={`w-full text-left p-4 rounded-2xl border transition-all flex items-center justify-between ${
+                  selectedPathway === path.id
+                    ? 'bg-slate-800/90 border-[#78ff73] text-white shadow-lg shadow-[#78ff73]/10'
+                    : 'bg-slate-950/40 border-slate-800/80 text-slate-300 hover:border-slate-700 hover:bg-slate-900/60'
+                }`}
+              >
+                <span className="text-sm font-medium">{path.label}</span>
+                <Route size={18} className={selectedPathway === path.id ? 'text-[#78ff73]' : 'text-slate-600'} />
+              </button>
+            ))}
           </div>
-        )}
 
-        {/* Flutter App Iframe */}
-        <iframe
-          src="https://voxrexlex.web.app" // Sau URL-ul de hosting Flutter/local
-          className="w-full h-full border-0"
-          onLoad={() => setIsLoading(false)}
-          title="VoxRexLex Workspace"
-        />
+          {/* Interactive Flow visualization when path selected */}
+          {currentPath && (
+            <div className="p-6 bg-slate-950/80 rounded-2xl border border-[#78ff73]/30 space-y-6 animate-fadeIn">
+              <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400 border-b border-slate-800 pb-4">
+                <div><span className="text-[#78ff73]">ORIGINE (X):</span> {currentPath.from}</div>
+                <div className="hidden md:block border-t border-dashed border-[#78ff73]/40 flex-1 mx-4" />
+                <div><span className="text-amber-400">ESCALĂ (Z):</span> {currentPath.stopover}</div>
+                <div className="hidden md:block border-t border-dashed border-[#78ff73]/40 flex-1 mx-4" />
+                <div><span className="text-indigo-400">DESTINAȚIE (Y):</span> {currentPath.to}</div>
+              </div>
+
+              <div>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Traseul Recomandat:</span>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {currentPath.steps.map((toolId, idx) => {
+                    const tool = ALL_TOOLS.find((t) => t.id === toolId);
+                    if (!tool) return null;
+                    const Icon = tool.icon;
+                    return (
+                      <React.Fragment key={tool.id}>
+                        <Link
+                          href={tool.href}
+                          className="group p-4 bg-slate-900 border border-slate-800 hover:border-[#78ff73] rounded-xl transition-all flex flex-col justify-between"
+                        >
+                          <div>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-[10px] font-mono text-[#78ff73] bg-[#78ff73]/10 px-2 py-0.5 rounded">
+                                PASUL {idx + 1}
+                              </span>
+                              <Icon size={18} className="text-slate-400 group-hover:text-[#78ff73] transition-colors" />
+                            </div>
+                            <div className="font-bold text-sm text-white group-hover:text-[#78ff73] transition-colors">
+                              {tool.title}
+                            </div>
+                          </div>
+                          <div className="flex items-center text-xs text-[#78ff73] font-semibold mt-4">
+                            <span>Lansează Pasul</span>
+                            <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </Link>
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* --- ALL TOOLS GRID --- */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <Zap size={20} className="text-[#78ff73]" />
+              <span>Toate Galaxiile & Uneltele Directe</span>
+            </h2>
+            <span className="text-xs text-slate-500 font-mono">100% Client-Side Engine</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ALL_TOOLS.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="group relative bg-slate-900/40 border border-slate-800/80 hover:border-[#78ff73]/40 p-6 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-[#78ff73]/5 flex flex-col justify-between backdrop-blur-sm"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 bg-slate-800/60 rounded-xl text-[#78ff73] group-hover:scale-110 transition-transform border border-slate-700/50">
+                        <Icon size={22} />
+                      </div>
+                      <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
+                        {tool.badge}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#78ff73] transition-colors">
+                      {tool.title}
+                    </h3>
+                    <p className="text-slate-400 text-xs leading-relaxed mb-6">
+                      {tool.description}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center text-xs font-bold text-[#78ff73] group-hover:translate-x-1 transition-all">
+                    <span>Deschide Unealta</span>
+                    <ArrowRight size={14} className="ml-1.5" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center text-slate-500 text-xs pt-8 border-t border-slate-800/50 flex justify-between items-center">
+          <span>KillKit © 2026 — Built for speed, privacy, and flow.</span>
+          <div className="flex items-center gap-1 text-[#78ff73]">
+            <Zap size={14} />
+            <span>Mundus Mirabilis Online</span>
+          </div>
+        </footer>
+
       </div>
     </main>
   );
