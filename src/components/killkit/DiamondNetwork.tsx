@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import KillKitNode from './KillKitNode';
-import { FileText, Receipt, FileCode, Image, ShieldCheck, Sparkles } from 'lucide-react';
+import { FileText, Receipt, FileCode, Image, ShieldCheck } from 'lucide-react';
 
 interface ToolNode {
   id: string;
@@ -11,7 +11,7 @@ interface ToolNode {
   icon: any;
   href: string;
   badge?: string;
-  connectedTo?: string[]; // ID-urile nodurilor de care este conectat
+  connectedTo?: string[];
 }
 
 const TOOLS: ToolNode[] = [
@@ -75,25 +75,51 @@ export function DiamondNetwork() {
   const [activeNode, setActiveNode] = useState<string | null>(null);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto py-8">
-      {/* Network Grid */}
-      <div className="flex flex-wrap justify-center gap-12 relative z-10">
-        {TOOLS.map((tool) => (
-          <div
-            key={tool.id}
-            onMouseEnter={() => setActiveNode(tool.id)}
-            onMouseLeave={() => setActiveNode(null)}
-            className="transition-opacity duration-300"
-          >
-            <KillKitNode
-              title={tool.title}
-              description={tool.description}
-              icon={tool.icon}
-              href={tool.href}
-              badge={tool.badge}
-            />
-          </div>
-        ))}
+    <div className="relative w-full max-w-5xl mx-auto py-10">
+      {/* Background Constellation Lines (SVG) */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <line x1="15%" y1="20%" x2="50%" y2="20%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="50%" y1="20%" x2="85%" y2="20%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="15%" y1="70%" x2="50%" y2="70%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="50%" y1="70%" x2="85%" y2="70%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
+        <line x1="50%" y1="20%" x2="50%" y2="70%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
+      </svg>
+
+      {/* Grid distribution */}
+      <div className="flex flex-wrap justify-center gap-10 md:gap-14 relative z-10">
+        {TOOLS.map((tool) => {
+          const isConnected =
+            activeNode === null ||
+            activeNode === tool.id ||
+            TOOLS.find((t) => t.id === activeNode)?.connectedTo?.includes(tool.id) ||
+            tool.connectedTo?.includes(activeNode);
+
+          const isActive = activeNode === tool.id;
+
+          return (
+            <div
+              key={tool.id}
+              onMouseEnter={() => setActiveNode(tool.id)}
+              onMouseLeave={() => setActiveNode(null)}
+              className={`transition-all duration-300 ease-out ${
+                isConnected
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-20 scale-95 blur-[1px]'
+              } ${isActive ? 'z-20' : 'z-10'}`}
+            >
+              <KillKitNode
+                title={tool.title}
+                description={tool.description}
+                icon={tool.icon}
+                href={tool.href}
+                badge={tool.badge}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
