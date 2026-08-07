@@ -16,6 +16,7 @@ import {
   Compass,
   Route,
   ChevronRight,
+  QrCode
 } from 'lucide-react';
 
 const ALL_TOOLS = [
@@ -73,6 +74,15 @@ const ALL_TOOLS = [
     badge: 'B2B SUITE',
     badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
   },
+  {
+  id: 'qr-key-generator',
+  title: 'QR Architect & Key Vault',
+  description: 'Generate vector SVG QR codes and high-entropy cryptographic keys.',
+  icon: QrCode,
+  href: '/qr-key-generator',
+  badge: 'WEB & CIPHER',
+  badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+},
 ];
 
 const PATHWAY_PRESETS = [
