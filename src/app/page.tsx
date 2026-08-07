@@ -82,6 +82,15 @@ const ALL_TOOLS = [
   href: '/qr-key-generator',
   badge: 'WEB & CIPHER',
   badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+  },
+  {
+  id: 'pdf-organizer',
+  title: 'PDF Rotate & Watermark Stamp',
+  description: 'Rotate PDF pages and overlay custom diagonal watermark stamps.',
+  icon: FileText,
+  href: '/pdf-organizer',
+  badge: 'PDF CLUSTER',
+  badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
 },
 ];
 
