@@ -91,7 +91,16 @@ const ALL_TOOLS = [
   href: '/pdf-organizer',
   badge: 'PDF CLUSTER',
   badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
-},
+ },
+ {
+  id: 'svg-optimizer',
+  title: 'SVG Visualizer & Optimizer',
+  description: 'Clean, minify, preview SVG code and convert directly to React JSX components.',
+  icon: Code2,
+  href: '/svg-optimizer',
+  badge: 'MEDIA CLUSTER',
+  badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+ },
 ];
 
 const PATHWAY_PRESETS = [
