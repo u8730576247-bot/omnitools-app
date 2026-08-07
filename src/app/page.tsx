@@ -18,12 +18,11 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-// Structura de unelte din ecosistem
 const ALL_TOOLS = [
   {
     id: 'vox-rex-lex',
     title: 'VoxRexLex Workspace',
-    description: 'Aplicația completă de dictare și traducere juridică / medicală.',
+    description: 'Advanced legal and medical voice dictation & AI translation suite.',
     icon: Mic,
     href: '/vox-rex-lex',
     badge: 'GEMSTONE',
@@ -32,7 +31,7 @@ const ALL_TOOLS = [
   {
     id: 'pdf-merger',
     title: 'PDF Merger & Combiner',
-    description: 'Unește fișiere PDF direct în browser, 100% securizat și privat.',
+    description: 'Securely merge and combine PDF documents directly in your browser.',
     icon: FileText,
     href: '/pdf-merger',
     badge: 'PDF CLUSTER',
@@ -41,7 +40,7 @@ const ALL_TOOLS = [
   {
     id: 'json-converter',
     title: 'JSON to CSV Converter',
-    description: 'Convertește date structurate JSON în tabele CSV / Excel instant.',
+    description: 'Transform structured JSON data into clean CSV / Excel sheets instantly.',
     icon: FileCode,
     href: '/json-converter',
     badge: 'DATA CLUSTER',
@@ -50,7 +49,7 @@ const ALL_TOOLS = [
   {
     id: 'image-converter',
     title: 'Image Converter & Compressor',
-    description: 'Schimbă formatul imaginilor (PNG, JPG, WebP) și redu dimensiunea lor.',
+    description: 'Convert between PNG, JPG, WebP formats and optimize file sizes.',
     icon: ImageIcon,
     href: '/image-converter',
     badge: 'MEDIA LAB',
@@ -59,7 +58,7 @@ const ALL_TOOLS = [
   {
     id: 'exif-cleaner',
     title: 'Exif & Privacy Cleaner',
-    description: 'Elimină coordonatele GPS, modelul camerei și metadatele din poze.',
+    description: 'Strip GPS coordinates, device models, and sensitive metadata from photos.',
     icon: ShieldCheck,
     href: '/exif-cleaner',
     badge: 'PRIVACY',
@@ -68,7 +67,7 @@ const ALL_TOOLS = [
   {
     id: 'invoice-generator',
     title: 'Free Invoice Generator',
-    description: 'Creează facturi și chitanțe profesionale în câteva secunde.',
+    description: 'Generate professional B2B invoices and receipts in seconds.',
     icon: Receipt,
     href: '/invoice-generator',
     badge: 'B2B SUITE',
@@ -76,30 +75,29 @@ const ALL_TOOLS = [
   },
 ];
 
-// Scenarii de translație (X -> Z -> Y)
 const PATHWAY_PRESETS = [
   {
     id: 'legal-doc',
-    label: '🎙️ Am înregistrări audio și vreau să trimit un contract/raport PDF curat',
-    from: 'Audio / Înregistrare (X)',
-    stopover: 'Curățare Metadate Exif (Z)',
-    to: 'Contract PDF Fuzionat (Y)',
+    label: '🎙️ I have voice recordings and need to output a clean, merged PDF report',
+    from: 'Audio / Voice Recording (X)',
+    stopover: 'Privacy & Metadata Cleanup (Z)',
+    to: 'Final Combined PDF Document (Y)',
     steps: ['vox-rex-lex', 'exif-cleaner', 'pdf-merger'],
   },
   {
     id: 'data-privacy',
-    label: '🖼️ Am imagini de pe teren/proiecte și vreau să le scot locația GPS și să le comprim',
-    from: 'Fotografii Brute (X)',
-    stopover: 'Ștergere Metadate Privacy (Z)',
-    to: 'WebP Optimizat Web (Y)',
+    label: '🖼️ I have raw field photos and need GPS data removed + WebP compression',
+    from: 'Raw Photographs (X)',
+    stopover: 'Exif Location Stripping (Z)',
+    to: 'Optimized WebP Image (Y)',
     steps: ['exif-cleaner', 'image-converter'],
   },
   {
     id: 'dev-export',
-    label: '📊 Am un API JSON și trebuie să livrez un rapoart CSV / Factură clientului',
-    from: 'Sursă Date JSON (X)',
-    stopover: 'Export CSV / Tabel (Z)',
-    to: 'Factură B2B Finală (Y)',
+    label: '📊 I have raw JSON payload and need to deliver a client CSV / B2B Invoice',
+    from: 'JSON API Response (X)',
+    stopover: 'CSV Table Conversion (Z)',
+    to: 'B2B PDF Invoice (Y)',
     steps: ['json-converter', 'invoice-generator'],
   },
 ];
@@ -138,20 +136,20 @@ export default function Home() {
 
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 me-2 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-400">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-400">
             <Sparkles size={14} className="text-[#78ff73]" />
-            <span>Translație Rapidă în Mundus Mirabilis</span>
+            <span>Seamless Workflow Translation</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Din cotidianul banal, <br />
-            în <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#78ff73] via-emerald-400 to-indigo-400">Ecosistemul Conectat</span>
+            From everyday friction to <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#78ff73] via-emerald-400 to-indigo-400">Connected Workflows</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Ghidul tău prin galaxiile de micro-unelte. Alege unde te afli ($X$) și unde vrei să ajungi ($Y$), iar noi trasăm ruta optimă.
+            Your interactive pathway across micro-tool galaxies. Define where you start ($X$) and what you need ($Y$), and let us trace the optimal route.
           </p>
         </div>
 
-        {/* --- PATHFINDER / VORTEX ROUTER SECTION --- */}
+        {/* PATHFINDER / VORTEX ROUTER */}
         <section className="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 md:p-8 backdrop-blur-md relative overflow-hidden shadow-2xl">
           <div className="absolute -right-20 -top-20 w-64 h-64 bg-[#78ff73]/5 rounded-full blur-3xl pointer-events-none" />
           
@@ -163,11 +161,10 @@ export default function Home() {
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
                 Vortex Pathfinder <span className="text-xs font-mono text-[#78ff73] bg-[#78ff73]/10 px-2 py-0.5 rounded border border-[#78ff73]/30">X ➔ Z ➔ Y</span>
               </h2>
-              <p className="text-xs text-slate-400">Selectează intenția ta pentru a aprinde liniile de translație:</p>
+              <p className="text-xs text-slate-400">Select your intent to illuminate the translation route:</p>
             </div>
           </div>
 
-          {/* Selector Scenario */}
           <div className="grid grid-cols-1 gap-3 mb-8">
             {PATHWAY_PRESETS.map((path) => (
               <button
@@ -185,19 +182,18 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Interactive Flow visualization when path selected */}
           {currentPath && (
             <div className="p-6 bg-slate-950/80 rounded-2xl border border-[#78ff73]/30 space-y-6 animate-fadeIn">
               <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400 border-b border-slate-800 pb-4">
-                <div><span className="text-[#78ff73]">ORIGINE (X):</span> {currentPath.from}</div>
+                <div><span className="text-[#78ff73]">ORIGIN (X):</span> {currentPath.from}</div>
                 <div className="hidden md:block border-t border-dashed border-[#78ff73]/40 flex-1 mx-4" />
-                <div><span className="text-amber-400">ESCALĂ (Z):</span> {currentPath.stopover}</div>
+                <div><span className="text-amber-400">STOPOVER (Z):</span> {currentPath.stopover}</div>
                 <div className="hidden md:block border-t border-dashed border-[#78ff73]/40 flex-1 mx-4" />
-                <div><span className="text-indigo-400">DESTINAȚIE (Y):</span> {currentPath.to}</div>
+                <div><span className="text-indigo-400">TARGET (Y):</span> {currentPath.to}</div>
               </div>
 
               <div>
-                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Traseul Recomandat:</span>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-3">Recommended Sequence:</span>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {currentPath.steps.map((toolId, idx) => {
                     const tool = ALL_TOOLS.find((t) => t.id === toolId);
@@ -212,7 +208,7 @@ export default function Home() {
                           <div>
                             <div className="flex items-center justify-between mb-2">
                               <span className="text-[10px] font-mono text-[#78ff73] bg-[#78ff73]/10 px-2 py-0.5 rounded">
-                                PASUL {idx + 1}
+                                STEP {idx + 1}
                               </span>
                               <Icon size={18} className="text-slate-400 group-hover:text-[#78ff73] transition-colors" />
                             </div>
@@ -221,7 +217,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="flex items-center text-xs text-[#78ff73] font-semibold mt-4">
-                            <span>Lansează Pasul</span>
+                            <span>Launch Step</span>
                             <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </Link>
@@ -234,12 +230,12 @@ export default function Home() {
           )}
         </section>
 
-        {/* --- ALL TOOLS GRID --- */}
+        {/* ALL TOOLS GRID */}
         <section className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <Zap size={20} className="text-[#78ff73]" />
-              <span>Toate Galaxiile & Uneltele Directe</span>
+              <span>All Galaxies & Direct Tools</span>
             </h2>
             <span className="text-xs text-slate-500 font-mono">100% Client-Side Engine</span>
           </div>
@@ -271,7 +267,7 @@ export default function Home() {
                   </div>
 
                   <div className="flex items-center text-xs font-bold text-[#78ff73] group-hover:translate-x-1 transition-all">
-                    <span>Deschide Unealta</span>
+                    <span>Open Tool</span>
                     <ArrowRight size={14} className="ml-1.5" />
                   </div>
                 </Link>
