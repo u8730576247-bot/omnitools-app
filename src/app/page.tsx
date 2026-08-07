@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import KillKitNode from "../components/killkit/KillKitNode";
 import { FileText, Receipt, FileCode, Image, ShieldCheck, ArrowRight, Coffee } from 'lucide-react';
 
 export default function Home() {
@@ -92,40 +93,19 @@ export default function Home() {
 
         </div>
 
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool) => {
-            const Icon = tool.icon;
-            return (
-              <Link
-                key={tool.title}
-                href={tool.href}
-                className="group relative bg-[#131927] border border-slate-800/80 hover:border-slate-700/80 p-6 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-purple-500/10 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 bg-slate-800/60 rounded-xl text-slate-300 group-hover:text-blue-400 group-hover:bg-blue-500/10 transition-colors">
-                      <Icon size={22} />
-                    </div>
-                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
-                      {tool.badge}
-                    </span>
-                  </div>
-                  <h2 className="text-lg font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">
-                    {tool.title}
-                  </h2>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                    {tool.description}
-                  </p>
-                </div>
-
-                <div className="flex items-center text-sm font-semibold text-indigo-400 group-hover:text-indigo-300 transition-colors">
-                  Open <ArrowRight size={16} className="ml-1.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        {/* Node Grid Network */}
+<div className="flex flex-wrap justify-center gap-10 max-w-5xl mx-auto my-12">
+  {tools.map((tool) => (
+    <KillKitNode
+      key={tool.title}
+      title={tool.title}
+      description={tool.description}
+      icon={tool.icon}
+      href={tool.href}
+      badge={tool.badge}
+    />
+  ))}
+</div>
 
         {/* Footer */}
         <footer className="text-center text-slate-500 text-sm mt-20 pt-8 border-t border-slate-800/50">

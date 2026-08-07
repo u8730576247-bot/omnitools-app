@@ -1,0 +1,78 @@
+.kk-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  width: 240px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.kk-node:hover {
+  transform: translateY(-4px);
+}
+.kk-rings {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kk-ring {
+  position: absolute;
+  border: 2px solid #3b4658;
+  border-radius: 50%;
+  transition: all 0.35s ease;
+}
+
+.kk-ring.outer {
+  width: 180px;
+  height: 180px;
+}
+
+.kk-ring.middle {
+  width: 130px;
+  height: 130px;
+}
+
+.kk-ring.inner {
+  width: 80px;
+  height: 80px;
+}
+.kk-core {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #18212d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 10;
+  transition: all 0.35s ease;
+}
+.kk-title {
+  margin-top: 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.kk-description {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #8d97a6;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.kk-badge {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #78ff73;
+  font-weight: 700;
+}
