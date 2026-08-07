@@ -76,16 +76,72 @@ export function DiamondNetwork() {
 
   return (
     <div className="relative w-full max-w-5xl mx-auto py-10">
-      {/* Background Constellation Lines (SVG) */}
+      {/* CSS Animation locala pentru liniile de date */}
+      <style jsx>{`
+        @keyframes flow {
+          from {
+            stroke-dashoffset: 24;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+        .data-stream {
+          stroke-dasharray: 6 6;
+          animation: flow 1.2s linear infinite;
+        }
+      `}</style>
+
+      {/* Network Background SVG Lines */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-20 z-0"
+        className="absolute inset-0 w-full h-full pointer-events-none z-0"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <line x1="15%" y1="20%" x2="50%" y2="20%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
-        <line x1="50%" y1="20%" x2="85%" y2="20%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
-        <line x1="15%" y1="70%" x2="50%" y2="70%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
-        <line x1="50%" y1="70%" x2="85%" y2="70%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
-        <line x1="50%" y1="20%" x2="50%" y2="70%" stroke="#78ff73" strokeWidth="1" strokeDasharray="4 4" />
+        <line
+          x1="18%"
+          y1="22%"
+          x2="50%"
+          y2="22%"
+          stroke={activeNode ? '#78ff73' : '#334155'}
+          strokeWidth={activeNode ? '2' : '1'}
+          className={activeNode ? 'data-stream' : 'opacity-30'}
+        />
+        <line
+          x1="50%"
+          y1="22%"
+          x2="82%"
+          y2="22%"
+          stroke={activeNode ? '#78ff73' : '#334155'}
+          strokeWidth={activeNode ? '2' : '1'}
+          className={activeNode ? 'data-stream' : 'opacity-30'}
+        />
+        <line
+          x1="18%"
+          y1="75%"
+          x2="50%"
+          y2="75%"
+          stroke={activeNode ? '#78ff73' : '#334155'}
+          strokeWidth={activeNode ? '2' : '1'}
+          className={activeNode ? 'data-stream' : 'opacity-30'}
+        />
+        <line
+          x1="50%"
+          y1="75%"
+          x2="82%"
+          y2="75%"
+          stroke={activeNode ? '#78ff73' : '#334155'}
+          strokeWidth={activeNode ? '2' : '1'}
+          className={activeNode ? 'data-stream' : 'opacity-30'}
+        />
+        <line
+          x1="50%"
+          y1="22%"
+          x2="50%"
+          y2="75%"
+          stroke={activeNode ? '#78ff73' : '#334155'}
+          strokeWidth={activeNode ? '2' : '1'}
+          className={activeNode ? 'data-stream' : 'opacity-30'}
+        />
       </svg>
 
       {/* Grid distribution */}
