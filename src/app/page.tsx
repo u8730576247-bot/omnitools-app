@@ -15,8 +15,10 @@ import {
   Coffee,
   Sparkles,
   Zap,
+  BellRing,
 } from 'lucide-react';
 import KillKitGrid, { ToolItem } from '@/components/killkit/KillKitGrid';
+
 
 const ALL_TOOLS: ToolItem[] = [
   {
@@ -109,6 +111,24 @@ const ALL_TOOLS: ToolItem[] = [
     badge: 'WEB & CIPHER',
     badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
   },
+  {
+    id: 'creator-guard',
+    title: 'Creator Guard',
+    description: 'Protect and manage your creative digital assets on mobile.',
+    href: '/creator-guard.apk',
+    badge: 'MOBILE APP',
+    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    icon: ShieldCheck,
+  },
+  {
+    id: 'doc-reminder',
+    title: 'Doc Reminder',
+    description: 'Never miss a document expiration or renewal deadline.',
+    href: '/doc-reminder.apk',
+    badge: 'MOBILE APP',
+    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+    icon: BellRing,
+  },
 ];
 
 export default function Home() {
@@ -172,4 +192,3 @@ export default function Home() {
     </main>
   );
 }
-// test deploy grid
