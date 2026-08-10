@@ -1,192 +1,191 @@
 'use client';
 
-import React from 'react';
-import {
-  Mic,
-  QrCode,
-  RotateCw,
-  FileCode,
-  FileStack,
-  FileSpreadsheet,
-  Image as ImageIcon,
-  ShieldCheck,
-  Receipt,
-  Key,
-  Coffee,
-  Sparkles,
-  Zap,
-  BellRing,
-} from 'lucide-react';
-import KillKitGrid, { ToolItem } from '@/components/killkit/KillKitGrid';
-
-
-const ALL_TOOLS: ToolItem[] = [
-  {
-    id: 'vox-rex-lex',
-    title: 'VoxRexLex Workspace',
-    description: 'Advanced legal & medical voice dictation & AI translation suite.',
-    icon: Mic,
-    href: '/vox-rex-lex',
-    badge: 'GEMSTONE',
-    badgeColor: 'bg-[#78ff73]/20 text-[#78ff73] border-[#78ff73]/30',
-  },
-  {
-    id: 'qr-key-vault',
-    title: 'QR Architect & Key Vault',
-    description: 'Generate vector SVG QR codes and high-entropy cryptographic keys.',
-    icon: QrCode,
-    href: '/qr-key-vault',
-    badge: 'WEB & CIPHER',
-    badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-  },
-  {
-    id: 'pdf-rotate-stamp',
-    title: 'PDF Rotate & Watermark Stamp',
-    description: 'Rotate PDF pages and overlay custom diagonal watermark stamps.',
-    icon: RotateCw,
-    href: '/pdf-rotate-stamp',
-    badge: 'PDF CLUSTER',
-    badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
-  },
-  {
-    id: 'svg-optimizer',
-    title: 'SVG Visualizer & Optimizer',
-    description: 'Clean, minify, preview SVG code and convert directly to React JSX.',
-    icon: FileCode,
-    href: '/svg-optimizer',
-    badge: 'MEDIA CLUSTER',
-    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-  },
-  {
-    id: 'pdf-merger',
-    title: 'PDF Merger & Combiner',
-    description: 'Securely merge and combine PDF documents directly in your browser.',
-    icon: FileStack,
-    href: '/pdf-merger',
-    badge: 'PDF CLUSTER',
-    badgeColor: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
-  },
-  {
-    id: 'json-to-csv',
-    title: 'JSON to CSV Converter',
-    description: 'Transform structured JSON data into clean CSV / Excel sheets instantly.',
-    icon: FileSpreadsheet,
-    href: '/json-to-csv',
-    badge: 'DATA CLUSTER',
-    badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-  },
-  {
-    id: 'image-converter',
-    title: 'Image Converter & Compressor',
-    description: 'Convert and compress WebP, PNG, JPG locally in your browser.',
-    icon: ImageIcon,
-    href: '/image-converter',
-    badge: 'MEDIA CLUSTER',
-    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-  },
-  {
-    id: 'exif-cleaner',
-    title: 'Exif & Privacy Cleaner',
-    description: 'Strip metadata, GPS coordinates and device info from photos.',
-    icon: ShieldCheck,
-    href: '/exif-cleaner',
-    badge: 'PRIVACY',
-    badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
-  },
-  {
-    id: 'invoice-generator',
-    title: 'Free Invoice Generator',
-    description: 'Generate clean professional B2B PDF invoices instantly.',
-    icon: Receipt,
-    href: '/invoice-generator',
-    badge: 'B2B',
-    badgeColor: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  },
-  {
-    id: 'hash-generator',
-    title: 'Smart Hash & Passphrase Vault',
-    description: 'Compute SHA-256, SHA-512 hashes and generate memorable high-entropy passphrases.',
-    icon: Key,
-    href: '/hash-generator',
-    badge: 'WEB & CIPHER',
-    badgeColor: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
-  },
-  {
-    id: 'creator-guard',
-    title: 'Creator Guard',
-    description: 'Protect and manage your creative digital assets on mobile.',
-    href: 'https://github.com/u8730576247-bot/killkit-releases/releases/download/v1.0.0/creator-guard.apk',
-    badge: 'MOBILE APP',
-    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-    icon: ShieldCheck,
-  },
-  {
-    id: 'doc-reminder',
-    title: 'Doc Reminder',
-    description: 'Never miss a document expiration or renewal deadline.',
-    href: 'https://github.com/u8730576247-bot/killkit-releases/releases/download/v1.0.0/doc-reminder.apk',
-    badge: 'MOBILE APP',
-    badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-    icon: BellRing,
-  },
-];
+import { useState } from 'react';
+import Link from 'next/link';
+import { FAMILIES, FamilyCategory, ToolItem } from '@/config/categories';
+import { ArrowLeft, Sparkles, FolderLock } from 'lucide-react';
 
 export default function Home() {
+  const [selectedFamilyId, setSelectedFamilyId] = useState<string | null>(null);
+
+  const selectedFamily = FAMILIES.find((f) => f.id === selectedFamilyId);
+
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-slate-100 p-6 md:p-12 font-sans selection:bg-[#78ff73] selection:text-black">
+    <main className="min-h-screen bg-[#0B0F17] text-slate-100 p-6 md:p-12 font-sans selection:bg-cyan-500/30">
       <div className="max-w-6xl mx-auto space-y-12">
         
         {/* Header Navigation */}
-        <header className="flex items-center justify-between border-b border-slate-800/60 pb-6">
+        <header className="flex items-center justify-between border-b border-slate-800/80 pb-6">
           <div className="flex items-center gap-3">
-            <div className="bg-[#78ff73] text-black font-black p-2.5 rounded-xl text-xl shadow-lg shadow-[#78ff73]/20">
+            <div className="bg-[#78ff73] text-black font-black p-2.5 rounded-xl text-xl tracking-wider shadow-[0_0_20px_rgba(120,255,115,0.3)]">
               K
             </div>
             <div>
-              <span className="text-2xl font-bold tracking-tight text-white">KillKit</span>
-              <span className="text-xs block text-[#78ff73] font-mono tracking-wider">MUNDUS MIRABILIS</span>
+              <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                KILLKIT <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-mono">v2.0 Fractal</span>
+              </h1>
+              <p className="text-xs text-slate-400">OmniTools Ecosystem & Modular Suites</p>
             </div>
           </div>
 
-          <a
-            href="https://www.buymeacoffee.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-800 px-4 py-2 rounded-xl text-sm font-semibold transition-all hover:scale-105"
-          >
-            <Coffee size={18} />
-            <span className="hidden sm:inline">Buy me a coffee</span>
-          </a>
+          {selectedFamily && (
+            <button
+              onClick={() => setSelectedFamilyId(null)}
+              className="flex items-center gap-2 text-sm text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-800 px-4 py-2 rounded-xl border border-slate-700/50 transition-all cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" /> Toate Familiile
+            </button>
+          )}
         </header>
 
-        {/* Hero Section */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-400">
-            <Sparkles size={14} className="text-[#78ff73]" />
-            <span>Interactive Workflow Network</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Connect Everyday Tools <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#78ff73] via-emerald-400 to-indigo-400">In One Neon Grid</span>
-          </h1>
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Explore the connected micro-tool ecosystem. Click nodes or hover pathways to navigate across workflow galaxies.
-          </p>
+        {/* Dynamic Title / Breadcrumb */}
+        <div className="space-y-2">
+          {selectedFamily ? (
+            <>
+              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 uppercase tracking-widest">
+                <span>Familii</span> / <span className="text-white">{selectedFamily.title}</span>
+              </div>
+              <h2 className="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+                <selectedFamily.icon className="w-8 h-8 text-cyan-400" />
+                {selectedFamily.title}
+              </h2>
+              <p className="text-slate-400 max-w-2xl text-sm">{selectedFamily.description}</p>
+            </>
+          ) : (
+            <>
+              <h2 className="text-3xl font-bold text-white tracking-tight">Harta Utilitarelor (12 Clustere)</h2>
+              <p className="text-slate-400 max-w-2xl text-sm">
+                Alege o familie de aplicații pentru a explora uneltele specifice sau utilitarele în dezvoltare.
+              </p>
+            </>
+          )}
         </div>
 
-        {/* NEON GRID WITH CIRCLES & GUIDELINES */}
-        <section className="relative py-4">
-          <KillKitGrid tools={ALL_TOOLS} />
-        </section>
+        {/* LEVEL 1: GRID-UL CU FAMILII (Când nu e selectată nicio familie) */}
+        {!selectedFamily && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {FAMILIES.map((family) => {
+              const Icon = family.icon;
+              const isComingSoon = family.status === 'coming-soon';
+              const toolCount = family.tools.length;
 
-        {/* Footer */}
-        <footer className="text-center text-slate-500 text-xs pt-8 border-t border-slate-800/50 flex justify-between items-center">
-          <span>KillKit © 2026 — Built for speed, privacy, and flow.</span>
-          <div className="flex items-center gap-1 text-[#78ff73]">
-            <Zap size={14} />
-            <span>Mundus Mirabilis Online</span>
+              return (
+                <div
+                  key={family.id}
+                  onClick={() => setSelectedFamilyId(family.id)}
+                  className={`group relative p-6 rounded-2xl bg-slate-900/40 border transition-all duration-300 cursor-pointer backdrop-blur-sm flex flex-col justify-between hover:-translate-y-1 ${
+                    isComingSoon
+                      ? 'border-slate-800/60 opacity-60 hover:opacity-80 hover:border-slate-700'
+                      : 'border-slate-800 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]'
+                  }`}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between">
+                      <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/50 group-hover:bg-cyan-500/10 group-hover:border-cyan-500/30 group-hover:text-cyan-400 transition-colors">
+                        <Icon className="w-6 h-6 text-slate-300 group-hover:text-cyan-400" />
+                      </div>
+                      <span
+                        className={`text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full border ${
+                          isComingSoon
+                            ? 'bg-amber-500/10 text-amber-300 border-amber-500/20'
+                            : toolCount > 0
+                            ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20'
+                            : 'bg-slate-800 text-slate-400 border-slate-700'
+                        }`}
+                      >
+                        {isComingSoon ? 'INCEPTION' : `${toolCount} UNELTE`}
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                        {family.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                        {family.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-500 group-hover:text-slate-300">
+                    <span>{isComingSoon ? 'În dezvoltare' : 'Deschide clusterul'}</span>
+                    <span className="font-mono group-hover:translate-x-1 transition-transform">→</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </footer>
+        )}
+
+        {/* LEVEL 2: UNELTELE DIN FAMILIA SELECTATĂ */}
+        {selectedFamily && (
+          <div>
+            {selectedFamily.tools.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {selectedFamily.tools.map((tool: ToolItem) => {
+                  const ToolIcon = tool.icon;
+                  const isExternal = tool.href.startsWith('http');
+
+                  const CardContent = (
+                    <div className="group relative p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] backdrop-blur-sm flex flex-col justify-between h-full">
+                      <div className="space-y-4">
+                        <div className="flex items-start justify-between">
+                          <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/50 group-hover:bg-cyan-500/10 group-hover:border-cyan-500/30 group-hover:text-cyan-400 transition-colors">
+                            <ToolIcon className="w-6 h-6 text-slate-300 group-hover:text-cyan-400" />
+                          </div>
+                          <span className={`text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
+                            {tool.badge}
+                          </span>
+                        </div>
+
+                        <div>
+                          <h3 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                            {tool.title}
+                          </h3>
+                          <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                            {tool.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+                        <span>{isExternal ? 'Descarcă APK' : 'Lansează Unealta'}</span>
+                        <span className="group-hover:translate-x-1 transition-transform">→</span>
+                      </div>
+                    </div>
+                  );
+
+                  return isExternal ? (
+                    <a key={tool.id} href={tool.href} download className="block h-full">
+                      {CardContent}
+                    </a>
+                  ) : (
+                    <Link key={tool.id} href={tool.href} className="block h-full">
+                      {CardContent}
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              /* Mesaj dacă familia este goală / în dezvoltare */
+              <div className="p-12 rounded-3xl bg-slate-900/30 border border-slate-800/80 text-center space-y-4 max-w-xl mx-auto">
+                <div className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto text-amber-400 border border-slate-700">
+                  <FolderLock className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Cluster în Curs de Extindere</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Această familie este pregătită în arhitectură. Lucrăm la adăugarea de unelte noi specifice acestei categorii.
+                </p>
+                <button
+                  onClick={() => setSelectedFamilyId(null)}
+                  className="mt-2 inline-flex items-center gap-2 text-xs font-mono text-cyan-400 hover:text-cyan-300 pt-2"
+                >
+                  ← Înapoi la celelalte familii
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
       </div>
     </main>
