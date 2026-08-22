@@ -1,3 +1,4 @@
+'use client';
 import { Scale } from "lucide-react";
 import KillKitNode from "@/components/killkit/KillKitNode";
 

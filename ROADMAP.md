@@ -6,7 +6,7 @@
 
 ## ✅ Milestone 0 – Foundation
 
-- [x] Rename OmniTools → KillKit
+- [x] Rename KillKit → KillKit
 - [x] Stable Next.js application
 - [x] VoxRexLex integration
 - [x] Flutter Web working
